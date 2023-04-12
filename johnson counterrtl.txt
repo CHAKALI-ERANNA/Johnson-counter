@@ -1,0 +1,20 @@
+`timescale 1ns / 1ps
+
+module johnson_counter(clk,clr,Q,Qbar
+
+    );
+    input clk,clr;
+    output reg[4:0]Q;
+    inout [4:0]Qbar;
+    assign Qbar = ~Q;
+    always@(posedge clk)
+    begin
+        if(clr)
+            Q <= 0;
+        else
+        begin
+            Q[0] <= Qbar[4];
+            Q[4:1] <= Q[3:0];
+        end
+    end
+endmodule
